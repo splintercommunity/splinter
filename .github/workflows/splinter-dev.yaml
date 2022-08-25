@@ -4,7 +4,7 @@ on:
   - workflow_dispatch
 jobs:
   start_cluster:
-    if: github.repository == 'Cargill/splinter'
+    if: github.repository == 'splintercommunity/splinter'
     name: Start buildx cluster
     runs-on: ubuntu-latest
     outputs:
@@ -47,7 +47,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   build_splinter_dev:
-    if: github.repository == 'Cargill/splinter'
+    if: github.repository == 'splintercommunity/splinter'
     name: Build splinter-dev
     needs: start_cluster
     runs-on: ${{ needs.start_cluster.outputs.label }}
@@ -87,7 +87,7 @@ jobs:
       - start_cluster
       - build_splinter_dev
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'Cargill/splinter' && always() }}
+    if: ${{ github.repository == 'splintercommunity/splinter' && always() }}
     permissions:
       id-token: write
       contents: read

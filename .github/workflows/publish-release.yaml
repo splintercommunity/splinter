@@ -12,7 +12,7 @@ jobs:
 
   unit_test_splinter:
     if: >-
-      github.repository_owner == 'Cargill'
+      github.repository_owner == 'splintercommunity'
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
         run: just ci-test
 
   start_cluster:
-    if: github.repository == 'Cargill/splinter'
+    if: github.repository == 'splintercommunity/splinter'
     name: Start buildx cluster
     runs-on: ubuntu-latest
     outputs:
@@ -76,7 +76,7 @@ jobs:
       - start_cluster
       - unit_test_splinter
     if: >-
-      github.repository_owner == 'Cargill'
+      github.repository_owner == 'splintercommunity'
     runs-on: ${{ needs.start_cluster.outputs.label }}
     steps:
       - name: Display envvars
@@ -118,7 +118,7 @@ jobs:
       - start_cluster
       - publish_docker
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'Cargill/splinter' && always() }}
+    if: ${{ github.repository == 'splintercommunity/splinter' && always() }}
     permissions:
       id-token: write
       contents: read
@@ -149,7 +149,7 @@ jobs:
   publish_to_crates:
     needs: unit_test_splinter
     if: >-
-      github.repository_owner == 'Cargill'
+      github.repository_owner == 'splintercommunity'
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2

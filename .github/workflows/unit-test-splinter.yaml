@@ -20,7 +20,7 @@ jobs:
         run: if ! grep -q -w $GITHUB_ACTOR CODEOWNERS; then (echo "User is not authorized"; exit 1) fi
 
   start_cluster:
-    if: github.repository == 'Cargill/splinter'
+    if: github.repository == 'splintercommunity/splinter'
     name: Start buildx cluster
     needs: check_allowlist
     runs-on: ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
       - start_cluster
       - unit_test_splinter
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'Cargill/splinter' && always() }}
+    if: ${{ github.repository == 'splintercommunity/splinter' && always() }}
     permissions:
       id-token: write
       contents: read
