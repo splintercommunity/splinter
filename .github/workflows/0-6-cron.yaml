@@ -189,7 +189,7 @@ jobs:
   build_docker:
     runs-on: ubuntu-18.04
     if: >-
-      github.repository_owner == 'Cargill'
+      github.repository_owner == 'splintercommunity'
     steps:
       - uses: actions/checkout@v2
         with:
