@@ -22,6 +22,7 @@ use openssl::hash::{hash, MessageDigest};
 use protobuf::Message;
 
 use sabre_sdk::protocol::payload::CreateContractRegistryActionBuilder;
+use sawtooth::transact::protocol::batch::Batch;
 use splinter::admin::client::ProposalSlice;
 use splinter::admin::messages::{
     AuthorizationType, CircuitProposalVote, CreateCircuitBuilder, DurabilityType, PersistenceType,
@@ -32,7 +33,6 @@ use splinter::protos::admin::{
     CircuitAbandon, CircuitCreateRequest, CircuitDisbandRequest, CircuitManagementPayload,
     CircuitManagementPayload_Action, CircuitManagementPayload_Header, CircuitPurgeRequest,
 };
-use transact::protocol::batch::Batch;
 
 /// Makes the `CircuitManagementPayload` to create a circuit and returns the bytes of this
 /// payload
