@@ -42,8 +42,8 @@ use sabre_sdk::{
     },
     protos::FromBytes,
 };
+use sawtooth::transact::contract::archive::{default_scar_path, SmartContractArchive};
 use scabbard::client::{ReqwestScabbardClientBuilder, ScabbardClient, ServiceId};
-use transact::contract::archive::{default_scar_path, SmartContractArchive};
 
 use error::CliError;
 use signing::{create_cylinder_jwt_auth, load_signer};
