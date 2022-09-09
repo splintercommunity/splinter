@@ -18,8 +18,8 @@ pub mod factory;
 
 use std::fmt::Write;
 
+use sawtooth::transact::database::{lmdb::LmdbDatabase, Database, DatabaseError};
 use splinter::error::{InternalError, InvalidArgumentError, InvalidStateError};
-use transact::database::{lmdb::LmdbDatabase, Database, DatabaseError};
 
 use crate::hex;
 
@@ -128,7 +128,7 @@ mod tests {
     use std::path::Path;
     use std::thread;
 
-    use transact::{
+    use sawtooth::transact::{
         database::{
             lmdb::{LmdbContext, LmdbDatabase},
             DatabaseError,

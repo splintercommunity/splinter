@@ -21,8 +21,8 @@ use diesel::Connection;
 use diesel_migrations::MigrationConnection;
 
 use sawtooth::migrations::run_sqlite_migrations as run_sawtooth_sqlite_migrations;
+use sawtooth::transact::state::merkle::sql::migration::run_sqlite_migrations as run_transact_sqlite_migrations;
 use splinter::error::InternalError;
-use transact::state::merkle::sql::migration::run_sqlite_migrations as run_transact_sqlite_migrations;
 
 /// Run all pending database migrations.
 ///

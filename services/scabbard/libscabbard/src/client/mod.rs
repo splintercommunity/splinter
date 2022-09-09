@@ -21,7 +21,7 @@ mod reqwest;
 use std::str::FromStr;
 use std::time::Duration;
 
-use transact::protocol::batch::Batch;
+use sawtooth::transact::protocol::batch::Batch;
 
 pub use self::error::ScabbardClientError;
 #[cfg(feature = "reqwest")]

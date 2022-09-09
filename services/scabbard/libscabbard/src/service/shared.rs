@@ -17,9 +17,9 @@ use std::collections::{HashMap, HashSet, VecDeque};
 use cylinder::{PublicKey, Signature, Verifier as SignatureVerifier};
 use openssl::hash::{hash, MessageDigest};
 use protobuf::Message;
-use transact::protocol::batch::BatchPair;
-use transact::protocol::transaction::{HashMethod, TransactionHeader};
-use transact::protos::FromBytes;
+use sawtooth::protos::FromBytes;
+use sawtooth::transact::protocol::batch::BatchPair;
+use sawtooth::transact::protocol::transaction::{HashMethod, TransactionHeader};
 
 use splinter::{
     consensus::{PeerId, Proposal, ProposalId},

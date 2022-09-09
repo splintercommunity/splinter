@@ -36,16 +36,16 @@ use sawtooth::receipt::store::diesel::DieselReceiptStore;
 #[cfg(any(feature = "postgres", feature = "sqlite"))]
 use sawtooth::receipt::store::ReceiptStore;
 #[cfg(all(feature = "lmdb", any(feature = "postgres", feature = "sqlite")))]
+use sawtooth::transact::database::Database;
+#[cfg(any(feature = "postgres", feature = "sqlite"))]
+use sawtooth::transact::state::merkle::sql;
+#[cfg(all(feature = "lmdb", any(feature = "postgres", feature = "sqlite")))]
 use splinter::error::InternalError;
 use splinter::error::{InvalidArgumentError, InvalidStateError};
 use splinter::service::instance::{
     FactoryCreateError, ServiceArgValidator, ServiceFactory, ServiceInstance,
 };
 use splinter::service::instance::{OrchestratableService, OrchestratableServiceFactory};
-#[cfg(all(feature = "lmdb", any(feature = "postgres", feature = "sqlite")))]
-use transact::database::Database;
-#[cfg(any(feature = "postgres", feature = "sqlite"))]
-use transact::state::merkle::sql;
 
 use crate::hex::parse_hex;
 #[cfg(all(feature = "lmdb", any(feature = "postgres", feature = "sqlite")))]
@@ -977,7 +977,9 @@ mod tests {
     use super::*;
 
     use cylinder::{secp256k1::Secp256k1Context, Context};
-    use transact::state::merkle::sql::{backend::SqliteBackend, migration::MigrationManager};
+    use sawtooth::transact::state::merkle::sql::{
+        backend::SqliteBackend, migration::MigrationManager,
+    };
 
     /// Verify that the scabbard factory produces a valid `Scabbard` instance.
     #[test]

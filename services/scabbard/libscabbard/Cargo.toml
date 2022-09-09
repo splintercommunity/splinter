@@ -39,7 +39,6 @@ reqwest = { version = "0.11", optional = true, features = ["blocking", "json"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 splinter = { path = "../../../libsplinter", features = ["service"] }
-transact = { version = "0.5", features = ["state-merkle-sql", "family-sabre"] }
 
 [dependencies.augrim]
 version = "0.1"
@@ -48,12 +47,20 @@ features = ["algorithm-two-phase-commit"]
 
 [dependencies.sawtooth]
 version = "0.8"
-optional = true
 default-features = false
-features = ["lmdb", "transaction-receipt-store"]
+features = [
+    "lmdb",
+    "family-sabre",
+    "store",
+    "transaction-receipt-store",
+    "transact-database-lmdb",
+    "transact-protocol-transaction-builder",
+    "transact-state-merkle-sql",
+    "transact-workload-runner"
+    ]
 
 [dev-dependencies]
-transact = { version = "0.5", features = ["family-command", "family-command-transaction-builder", "state-merkle-sql"] }
+sawtooth = { version = "0.8", features = ["family-command", "family-command-transaction-builder", "transact-state-merkle-sql"] }
 splinter = { path = "../../../libsplinter", features = ["diesel"]}
 
 [build-dependencies]
@@ -99,7 +106,7 @@ diesel-postgres-tests = ["postgres"]
 events = ["splinter/events"]
 https = []
 lmdb = []
-postgres = ["diesel/postgres", "diesel_migrations", "log", "sawtooth/postgres", "transact/postgres"]
+postgres = ["diesel/postgres", "diesel_migrations", "log", "sawtooth/postgres"]
 rest-api = ["futures", "splinter/rest-api"]
 rest-api-actix-web-1 = ["actix-web", "rest-api", "splinter/rest-api-actix-web-1"]
 scabbardv3-consensus = ["augrim"]
@@ -125,5 +132,5 @@ scabbardv3 = [
     "splinter/service-message-sender-factory",
     ]
 scabbardv3-store = ["chrono"]
-splinter-service = ["log", "sawtooth"]
-sqlite = ["diesel/sqlite", "diesel_migrations", "log", "sawtooth/sqlite", "transact/sqlite"]
+splinter-service = ["log", "sawtooth/family-command", "sawtooth/family-sabre", "sawtooth/transact-execution"]
+sqlite = ["diesel/sqlite", "diesel_migrations", "log", "sawtooth/sqlite"]

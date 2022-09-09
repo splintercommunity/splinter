@@ -19,6 +19,7 @@ use std::thread::{Builder, JoinHandle};
 use std::time::Duration;
 
 use protobuf::Message;
+use sawtooth::protos::IntoBytes;
 use splinter::consensus::{
     error::{ConsensusSendError, ProposalManagerError},
     two_phase::v1::TwoPhaseEngine as TwoPhaseEngineV1,
@@ -26,7 +27,6 @@ use splinter::consensus::{
     ConsensusEngine, ConsensusMessage, ConsensusNetworkSender, PeerId, Proposal, ProposalId,
     ProposalManager, ProposalUpdate, StartupState,
 };
-use transact::protos::IntoBytes;
 
 use crate::protos::scabbard::{ProposedBatch, ScabbardMessage, ScabbardMessage_Type};
 

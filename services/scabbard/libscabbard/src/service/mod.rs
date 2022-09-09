@@ -34,16 +34,16 @@ use std::time::Duration;
 use cylinder::Verifier as SignatureVerifier;
 use protobuf::Message;
 use sawtooth::receipt::store::ReceiptStore;
+use sawtooth::{
+    protos::{FromBytes, IntoBytes},
+    transact::protocol::batch::BatchPair,
+};
 use splinter::{
     consensus::{Proposal, ProposalUpdate},
     service::instance::{
         OrchestratableService, ServiceDestroyError, ServiceError, ServiceInstance,
         ServiceMessageContext, ServiceNetworkRegistry, ServiceStartError, ServiceStopError,
     },
-};
-use transact::{
-    protocol::batch::BatchPair,
-    protos::{FromBytes, IntoBytes},
 };
 
 use crate::store::CommitHashStore;
@@ -544,14 +544,14 @@ pub mod tests {
 
     use cylinder::{secp256k1::Secp256k1Context, VerifierFactory};
     use sawtooth::receipt::store::{ReceiptIter, ReceiptStoreError};
+    use sawtooth::transact::protocol::receipt::TransactionReceipt;
+    use sawtooth::transact::{
+        database::{btree::BTreeDatabase, Database},
+        state::merkle::INDEXES,
+    };
     use splinter::service::instance::{
         ServiceConnectionError, ServiceDisconnectionError, ServiceMessageContext,
         ServiceNetworkSender, ServiceSendError,
-    };
-    use transact::protocol::receipt::TransactionReceipt;
-    use transact::{
-        database::{btree::BTreeDatabase, Database},
-        state::merkle::INDEXES,
     };
 
     use crate::service::state::merkle_state::MerkleStateConfig;

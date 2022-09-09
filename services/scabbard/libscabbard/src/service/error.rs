@@ -14,13 +14,13 @@
 
 use std::error::Error;
 
-use transact::database::error::DatabaseError;
-use transact::execution::adapter::ExecutionAdapterError;
-use transact::execution::executor::ExecutorError;
-use transact::protocol::batch::BatchBuildError;
-use transact::scheduler::SchedulerError;
-use transact::state::error::StateWriteError;
-use transact::state::merkle::StateDatabaseError;
+use sawtooth::transact::database::error::DatabaseError;
+use sawtooth::transact::execution::adapter::ExecutionAdapterError;
+use sawtooth::transact::execution::executor::ExecutorError;
+use sawtooth::transact::protocol::batch::BatchBuildError;
+use sawtooth::transact::scheduler::SchedulerError;
+use sawtooth::transact::state::error::StateWriteError;
+use sawtooth::transact::state::merkle::StateDatabaseError;
 
 #[derive(Debug)]
 pub enum ScabbardError {
