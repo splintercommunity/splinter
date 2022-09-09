@@ -19,11 +19,11 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 
 use openssl::hash::{hash, MessageDigest};
-use splinter::error::InternalError;
-use transact::{
-    database::lmdb::{LmdbContext, LmdbDatabase},
-    state::merkle::INDEXES,
+use sawtooth::{
+    transact::database::lmdb::{LmdbContext, LmdbDatabase},
+    transact::state::merkle::INDEXES,
 };
+use splinter::error::InternalError;
 
 use super::to_hex;
 use super::CURRENT_STATE_ROOT_INDEX;

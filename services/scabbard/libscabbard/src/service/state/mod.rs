@@ -24,32 +24,34 @@ use std::sync::{
 use std::time::{Duration, Instant, SystemTime};
 
 use protobuf::Message;
+#[cfg(test)]
+use sawtooth::families::command::CommandTransactionHandler;
 use sawtooth::receipt::store::ReceiptStore;
+use sawtooth::{
+    families::sabre::{
+        admin::SettingsAdminPermission, handler::SabreTransactionHandler,
+        ADMINISTRATORS_SETTING_ADDRESS, ADMINISTRATORS_SETTING_KEY,
+    },
+    transact::{
+        context::manager::sync::ContextManager,
+        execution::{adapter::static_adapter::StaticExecutionAdapter, executor::Executor},
+        protocol::{
+            batch::BatchPair,
+            receipt::{TransactionReceipt, TransactionResult},
+        },
+        scheduler::{serial::SerialScheduler, BatchExecutionResult, Scheduler},
+        state::{
+            merkle::{MerkleRadixLeafReadError, MerkleRadixLeafReader},
+            Prune, Read, StateChange as TransactStateChange, Write,
+        },
+    },
+};
 use serde::{
     de::{SeqAccess, Visitor},
     Deserialize, Deserializer, Serialize,
 };
 #[cfg(feature = "events")]
 use splinter::events::{ParseBytes, ParseError};
-#[cfg(test)]
-use transact::families::command::CommandTransactionHandler;
-use transact::{
-    context::manager::sync::ContextManager,
-    execution::{adapter::static_adapter::StaticExecutionAdapter, executor::Executor},
-    families::sabre::{
-        admin::SettingsAdminPermission, handler::SabreTransactionHandler,
-        ADMINISTRATORS_SETTING_ADDRESS, ADMINISTRATORS_SETTING_KEY,
-    },
-    protocol::{
-        batch::BatchPair,
-        receipt::{TransactionReceipt, TransactionResult},
-    },
-    scheduler::{serial::SerialScheduler, BatchExecutionResult, Scheduler},
-    state::{
-        merkle::{MerkleRadixLeafReadError, MerkleRadixLeafReader},
-        Prune, Read, StateChange as TransactStateChange, Write,
-    },
-};
 
 use crate::protos::scabbard::{Setting, Setting_Entry};
 use crate::service::error::{ScabbardStateError, StateSubscriberError};
@@ -473,13 +475,15 @@ impl fmt::Debug for StateChange {
     }
 }
 
-impl From<transact::protocol::receipt::StateChange> for StateChange {
-    fn from(change: transact::protocol::receipt::StateChange) -> Self {
+impl From<sawtooth::transact::protocol::receipt::StateChange> for StateChange {
+    fn from(change: sawtooth::transact::protocol::receipt::StateChange) -> Self {
         match change {
-            transact::protocol::receipt::StateChange::Set { key, value } => {
+            sawtooth::transact::protocol::receipt::StateChange::Set { key, value } => {
                 StateChange::Set { key, value }
             }
-            transact::protocol::receipt::StateChange::Delete { key } => StateChange::Delete { key },
+            sawtooth::transact::protocol::receipt::StateChange::Delete { key } => {
+                StateChange::Delete { key }
+            }
         }
     }
 }
@@ -950,11 +954,11 @@ mod tests {
     };
     use sawtooth::migrations::run_sqlite_migrations;
     use sawtooth::receipt::store::diesel::DieselReceiptStore;
-    use transact::{
-        database::{btree::BTreeDatabase, Database},
+    use sawtooth::{
         families::command::CommandTransactionBuilder,
-        protocol::command::{BytesEntry, Command, SetState},
-        state::merkle::INDEXES,
+        transact::database::{btree::BTreeDatabase, Database},
+        transact::protocol::command::{BytesEntry, Command, SetState},
+        transact::state::merkle::INDEXES,
     };
 
     use crate::store::transact::{TransactCommitHashStore, CURRENT_STATE_ROOT_INDEX};

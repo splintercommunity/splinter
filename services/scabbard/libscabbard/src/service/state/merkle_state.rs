@@ -18,19 +18,19 @@ use std::sync::{Arc, RwLock};
 
 #[cfg(feature = "diesel")]
 use diesel::r2d2::{ConnectionManager, Pool};
-use splinter::error::InternalError;
 #[cfg(any(feature = "postgres", feature = "sqlite"))]
-use transact::state::merkle::sql::{
+use sawtooth::transact::state::merkle::sql::{
     self,
     store::{MerkleRadixStore, SqlMerkleRadixStore},
 };
-use transact::{
+use sawtooth::transact::{
     database::Database,
     state::{
         merkle::{kv, MerkleRadixLeafReadError, MerkleRadixLeafReader},
         Prune, Read, StateChange, StatePruneError, StateReadError, StateWriteError, Write,
     },
 };
+use splinter::error::InternalError;
 
 pub enum MerkleStateConfig {
     KeyValue {

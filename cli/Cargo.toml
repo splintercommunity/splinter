@@ -46,12 +46,11 @@ serde_json = "1.0"
 serde_yaml = "0.8"
 whoami = "0.7.0"
 users = "0.11"
-transact = { version = "0.5", features = ["state-merkle-sql"] }
 
 [dependencies.sawtooth]
 version = "0.8"
 default-features = false
-features = ["lmdb", "transaction-receipt-store"]
+features = ["lmdb", "transaction-receipt-store", "transact"]
 
 [dependencies.splinter]
 path = "../libsplinter"
@@ -104,11 +103,11 @@ experimental = [
 authorization-handler-maintenance = []
 authorization-handler-rbac = []
 circuit-template = ["splinter/circuit-template"]
-command = ["transact/family-command-workload"]
+command = ["sawtooth/family-command-workload"]
 database = ["diesel"]
 echo = ["splinter-echo"]
 https-certs = []
-playlist-smallbank = ["transact/family-smallbank-workload", "transact/workload-batch-gen"]
+playlist-smallbank = ["sawtooth/family-smallbank-workload", "sawtooth/transact-workload-batch-gen"]
 postgres = [
     "diesel/postgres",
     "splinter/postgres",
@@ -129,11 +128,11 @@ user = []
 workload = [
     "ctrlc",
     "rand",
-    "transact/family-command-workload",
-    "transact/workload",
-    "transact/workload-runner"
+    "sawtooth/family-command-workload",
+    "sawtooth/transact-workload",
+    "sawtooth/transact-workload-runner"
 ]
-workload-smallbank = ["workload", "transact/family-smallbank-workload"]
+workload-smallbank = ["workload", "sawtooth/family-smallbank-workload"]
 
 
 [package.metadata.deb]

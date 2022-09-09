@@ -19,8 +19,8 @@ use std::sync::mpsc::{channel, Sender, TryRecvError};
 use std::sync::Arc;
 use std::{thread, time};
 
-use transact::error::InternalError;
-use transact::workload::HttpRequestCounter;
+use sawtooth::error::InternalError;
+use sawtooth::transact::workload::HttpRequestCounter;
 
 use crate::action::time::Time;
 

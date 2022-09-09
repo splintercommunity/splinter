@@ -22,8 +22,9 @@ use reqwest::{
     blocking::{Client, RequestBuilder, Response},
     Url,
 };
+use sawtooth::protos::IntoBytes;
+use sawtooth::transact::protocol::batch::Batch;
 use serde::{Deserialize, Serialize};
-use transact::{protocol::batch::Batch, protos::IntoBytes};
 
 use crate::hex::parse_hex;
 use crate::protocol::SCABBARD_PROTOCOL_VERSION;

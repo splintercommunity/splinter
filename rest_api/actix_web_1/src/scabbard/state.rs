@@ -108,15 +108,15 @@ mod tests {
     use reqwest::{blocking::Client, StatusCode, Url};
     use sawtooth::migrations::run_sqlite_migrations;
     use sawtooth::receipt::store::diesel::DieselReceiptStore;
-    use serde_json::{to_value, Value as JsonValue};
-    use transact::{
+    use sawtooth::transact::{
         database::{btree::BTreeDatabase, Database},
         state::merkle::INDEXES,
     };
-    use transact::{
+    use sawtooth::transact::{
         families::command::CommandTransactionBuilder,
         protocol::command::{BytesEntry, Command, SetState},
     };
+    use serde_json::{to_value, Value as JsonValue};
 
     #[cfg(feature = "authorization")]
     use splinter::rest_api::auth::authorization::{

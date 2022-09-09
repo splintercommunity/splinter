@@ -14,8 +14,8 @@
 
 use std::sync::Arc;
 
-use transact::protocol::batch::BatchPair;
-use transact::protos::FromBytes;
+use sawtooth::protos::FromBytes;
+use sawtooth::transact::protocol::batch::BatchPair;
 
 use actix_web::{web, Error as ActixError, HttpResponse};
 use futures::{stream::Stream, Future, IntoFuture};

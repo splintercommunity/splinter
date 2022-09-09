@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use sawtooth::protos::ProtoConversionError;
 use std::error::Error;
-use transact::protos::ProtoConversionError;
 
 /// General error type used by the scabbard client.
 #[derive(Debug)]

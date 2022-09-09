@@ -22,9 +22,9 @@ use std::path::PathBuf;
 use std::str::FromStr;
 
 use clap::ArgMatches;
+use sawtooth::transact::state::{Committer, Pruner, Reader, StateChange};
 use scabbard::store::transact::factory::LmdbDatabaseFactory;
 use splinter::error::InternalError;
-use transact::state::{Committer, Pruner, Reader, StateChange};
 
 use crate::action::database::{
     stores::{new_upgrade_stores, UpgradeStoresWithLmdb},

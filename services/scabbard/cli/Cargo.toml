@@ -35,7 +35,7 @@ dirs = "4"
 flexi_logger = { version = "0.21", features = ["use_chrono_for_offset"] }
 log = "0.4"
 sabre-sdk = "0.9"
-transact = { version = "0.5", features = ["contract-archive"] }
+sawtooth = { version = "0.8", features = ["transact-contract-archive"] }
 scabbard = { path = "../libscabbard", features = ["client-reqwest"], default-features=false }
 
 [features]

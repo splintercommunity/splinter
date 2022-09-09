@@ -23,11 +23,11 @@ use sabre_sdk::{
     },
     protos::ProtoConversionError,
 };
-use scabbard::client::ScabbardClientError;
-use transact::{
+use sawtooth::transact::{
     contract::archive::Error as ContractArchiveError,
     protocol::{batch::BatchBuildError, transaction::TransactionBuildError},
 };
+use scabbard::client::ScabbardClientError;
 
 #[derive(Debug)]
 pub enum CliError {

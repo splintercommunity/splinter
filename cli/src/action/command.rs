@@ -15,15 +15,15 @@
 use clap::ArgMatches;
 use protobuf::{Message, RepeatedField};
 use reqwest::{blocking::Client, header};
-use serde::Deserialize;
-use transact::protocol::batch::BatchPair;
-use transact::protocol::sabre::payload::ExecuteContractActionBuilder;
-use transact::protos::FromProto;
-use transact::protos::{
+use sawtooth::protos::FromProto;
+use sawtooth::protos::{
     batch::{Batch, BatchHeader},
     command::{BytesEntry, Command, CommandPayload, Command_CommandType, GetState, SetState},
     IntoBytes, IntoProto,
 };
+use sawtooth::transact::protocol::batch::BatchPair;
+use sawtooth::transact::protocol::sabre::payload::ExecuteContractActionBuilder;
+use serde::Deserialize;
 
 use crate::error::CliError;
 use crate::signing::{create_cylinder_jwt_auth, load_signer};
