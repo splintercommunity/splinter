@@ -15,9 +15,7 @@
 use std::cell::RefCell;
 use std::collections::HashMap;
 
-use scabbard::store::transact::factory::LmdbDatabaseFactory;
-use splinter::error::InternalError;
-use transact::{
+use sawtooth::transact::{
     database::btree::BTreeDatabase,
     state::{
         merkle::kv::{MerkleRadixTree, MerkleState, INDEXES},
@@ -25,6 +23,8 @@ use transact::{
         ValueIterResult,
     },
 };
+use scabbard::store::transact::factory::LmdbDatabaseFactory;
+use splinter::error::InternalError;
 
 pub struct LazyLmdbMerkleState {
     factory: LmdbDatabaseFactory,
@@ -85,7 +85,7 @@ impl LazyLmdbMerkleState {
         }
     }
 
-    fn get_state(&self) -> Result<MerkleState, transact::error::InternalError> {
+    fn get_state(&self) -> Result<MerkleState, sawtooth::error::InternalError> {
         let mut inner = self.inner.borrow_mut();
         if let Some(state) = &*inner {
             return Ok(state.clone());
@@ -94,18 +94,18 @@ impl LazyLmdbMerkleState {
         let state_db = self
             .factory
             .get_database(&*self.circuit_id, &*self.service_id)
-            .map_err(|e| transact::error::InternalError::with_message(format!("{}", e)))?;
+            .map_err(|e| sawtooth::error::InternalError::with_message(format!("{}", e)))?;
 
         let state = MerkleState::new(Box::new(state_db.clone()));
 
         // We recompute this, otherwise the tree does not have the correct initial state root
         // nodes persisted, if the tree is new.
         let initial_state_root_hash = MerkleRadixTree::new(Box::new(state_db), None)
-            .map_err(|e| transact::error::InternalError::with_message(format!("{}", e)))?
+            .map_err(|e| sawtooth::error::InternalError::with_message(format!("{}", e)))?
             .get_merkle_root();
 
         if initial_state_root_hash != *self.initial_state_root_hash {
-            return Err(transact::error::InternalError::with_message(format!(
+            return Err(sawtooth::error::InternalError::with_message(format!(
                 "BTreeDatabase did not produce the same initial state root hash as \
                  a LmdbDatabase: {} != {}",
                 self.initial_state_root_hash, initial_state_root_hash

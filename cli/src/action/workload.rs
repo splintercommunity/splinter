@@ -19,14 +19,14 @@ use std::time::Duration;
 use clap::ArgMatches;
 use cylinder::Signer;
 use rand::Rng;
-use transact::families::command::workload::{
+use sawtooth::families::command::workload::{
     CommandBatchWorkload, CommandGeneratingIter, CommandTransactionWorkload,
 };
 #[cfg(feature = "workload-smallbank")]
-use transact::families::smallbank::workload::{
+use sawtooth::families::smallbank::workload::{
     playlist::SmallbankGeneratingIter, SmallbankBatchWorkload, SmallbankTransactionWorkload,
 };
-use transact::workload::{HttpRequestCounter, WorkloadRunner};
+use sawtooth::transact::workload::{HttpRequestCounter, WorkloadRunner};
 
 use crate::action::request_logger::RequestLogger;
 use crate::error::CliError;

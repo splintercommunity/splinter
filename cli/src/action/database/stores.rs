@@ -15,6 +15,7 @@
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
 use sawtooth::receipt::store::{diesel::DieselReceiptStore, ReceiptStore};
+use sawtooth::transact::state::merkle::sql::{backend, SqlMerkleStateBuilder};
 use scabbard::store::transact::factory::LmdbDatabaseFactory;
 use scabbard::store::{
     diesel::{DieselCommitHashStore, DieselInTransactionCommitHashStore},
@@ -25,7 +26,6 @@ use splinter::{
     error::InternalError,
     node_id::store::{diesel::DieselNodeIdStore, NodeIdStore},
 };
-use transact::state::merkle::sql::{backend, SqlMerkleStateBuilder};
 
 #[cfg(any(feature = "postgres", feature = "sqlite"))]
 use super::state::{DieselInTransactionStateTreeStore, DieselStateTreeStore};
