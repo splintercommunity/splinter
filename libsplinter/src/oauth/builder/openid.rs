@@ -143,7 +143,7 @@ impl OpenIdOAuthClientBuilder {
         })?;
 
         // make a call to the discovery document
-        let response = Client::new().get(&discovery_url).send().map_err(|err| {
+        let response = Client::new().get(discovery_url).send().map_err(|err| {
             InternalError::from_source_with_message(
                 Box::new(err),
                 "Unable to retrieve OpenID discovery document".into(),

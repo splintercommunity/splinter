@@ -38,7 +38,7 @@ impl Action for StatusAction {
         let signer = load_signer(arg_matches.and_then(|args| args.value_of("private_key_file")))?;
 
         Client::new()
-            .get(&format!("{}/health/status", url))
+            .get(format!("{}/health/status", url))
             .header("Authorization", create_cylinder_jwt_auth(signer)?)
             .send()
             .map_err(|err| match err.status() {

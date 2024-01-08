@@ -75,7 +75,7 @@ impl SplinterRestClient {
     /// Gets the Splinter node's status.
     pub fn get_node_status(&self) -> Result<NodeStatus, CliError> {
         Client::new()
-            .get(&format!("{}/status", self.url))
+            .get(format!("{}/status", self.url))
             .header("Authorization", &self.auth)
             .send()
             .map_err(|err| CliError::ActionError(format!("Failed to fetch node ID: {}", err)))
@@ -111,7 +111,7 @@ impl SplinterRestClient {
     #[cfg(feature = "authorization-handler-maintenance")]
     pub fn is_maintenance_mode_enabled(&self) -> Result<bool, CliError> {
         Client::new()
-            .get(&format!("{}/authorization/maintenance", self.url))
+            .get(format!("{}/authorization/maintenance", self.url))
             .header("Authorization", &self.auth)
             .send()
             .map_err(|err| {
@@ -157,7 +157,7 @@ impl SplinterRestClient {
     #[cfg(feature = "authorization-handler-maintenance")]
     pub fn set_maintenance_mode(&self, enabled: bool) -> Result<(), CliError> {
         Client::new()
-            .post(&format!("{}/authorization/maintenance", self.url))
+            .post(format!("{}/authorization/maintenance", self.url))
             .query(&[("enabled", enabled)])
             .header("Authorization", &self.auth)
             .send()
@@ -191,7 +191,7 @@ impl SplinterRestClient {
     /// Lists all REST API permissions for a Splinter node.
     pub fn list_permissions(&self) -> Result<Vec<Permission>, CliError> {
         Client::new()
-            .get(&format!("{}/authorization/permissions", self.url))
+            .get(format!("{}/authorization/permissions", self.url))
             .header("Authorization", &self.auth)
             .send()
             .map_err(|err| CliError::ActionError(format!("Failed to get permissions: {}", err)))

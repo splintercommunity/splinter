@@ -26,7 +26,7 @@ impl SplinterRestClient {
     /// Adds a new node to the registry.
     pub fn add_node(&self, node: &RegistryNode) -> Result<(), CliError> {
         let request = Client::new()
-            .post(&format!("{}/registry/nodes", self.url))
+            .post(format!("{}/registry/nodes", self.url))
             .json(&node)
             .header("Authorization", &self.auth);
 
@@ -59,7 +59,7 @@ impl SplinterRestClient {
     /// Retrieves the node with the given identity from the registry.
     pub fn get_node(&self, identity: &str) -> Result<Option<RegistryNode>, CliError> {
         let request = Client::new()
-            .get(&format!("{}/registry/nodes/{}", self.url, &identity))
+            .get(format!("{}/registry/nodes/{}", self.url, &identity))
             .header("Authorization", &self.auth);
 
         request.send()

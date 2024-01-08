@@ -43,7 +43,7 @@ impl RegistryClient for ReqwestRegistryClient {
     /// Add the given `node` to the registry.
     fn add_node(&self, node: &RegistryNode) -> Result<(), InternalError> {
         let request = Client::new()
-            .post(&format!("{}/registry/nodes", self.url))
+            .post(format!("{}/registry/nodes", self.url))
             .json(&node)
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .header("Authorization", &self.auth);
@@ -81,7 +81,7 @@ impl RegistryClient for ReqwestRegistryClient {
     /// Retrieve the node with the given `identity` from the registry.
     fn get_node(&self, identity: &str) -> Result<Option<RegistryNode>, InternalError> {
         let request = Client::new()
-            .get(&format!("{}/registry/nodes/{}", self.url, &identity))
+            .get(format!("{}/registry/nodes/{}", self.url, &identity))
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .header("Authorization", &self.auth);
 
@@ -177,7 +177,7 @@ impl RegistryClient for ReqwestRegistryClient {
     /// Update the node in the registry with the same id as the given `node`.
     fn update_node(&self, node: &RegistryNode) -> Result<(), InternalError> {
         let request = Client::new()
-            .put(&format!("{}/registry/nodes/{}", self.url, node.identity))
+            .put(format!("{}/registry/nodes/{}", self.url, node.identity))
             .json(&node)
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .header("Authorization", &self.auth);
@@ -215,7 +215,7 @@ impl RegistryClient for ReqwestRegistryClient {
     /// Delete the node with the given `identity` from the registry.
     fn delete_node(&self, identity: &str) -> Result<(), InternalError> {
         let request = Client::new()
-            .delete(&format!("{}/registry/nodes/{}", self.url, identity))
+            .delete(format!("{}/registry/nodes/{}", self.url, identity))
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .header("Authorization", &self.auth);
 

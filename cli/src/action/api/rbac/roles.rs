@@ -190,7 +190,7 @@ struct RoleGet {
 
 pub fn get_role(base_url: &str, auth: &str, role_id: &str) -> Result<Option<Role>, CliError> {
     Client::new()
-        .get(&format!("{}/authorization/roles/{}", base_url, role_id))
+        .get(format!("{}/authorization/roles/{}", base_url, role_id))
         .header("SplinterProtocolVersion", RBAC_PROTOCOL_VERSION)
         .header("Authorization", auth)
         .send()
@@ -231,7 +231,7 @@ pub fn get_role(base_url: &str, auth: &str, role_id: &str) -> Result<Option<Role
 
 pub fn create_role(base_url: &str, auth: &str, role: Role) -> Result<(), CliError> {
     Client::new()
-        .post(&format!("{}/authorization/roles", base_url))
+        .post(format!("{}/authorization/roles", base_url))
         .header("SplinterProtocolVersion", RBAC_PROTOCOL_VERSION)
         .header("Authorization", auth)
         .json(&role)
@@ -265,7 +265,7 @@ pub fn create_role(base_url: &str, auth: &str, role: Role) -> Result<(), CliErro
 
 pub fn update_role(base_url: &str, auth: &str, role_update: RoleUpdate) -> Result<(), CliError> {
     Client::new()
-        .patch(&format!(
+        .patch(format!(
             "{}/authorization/roles/{}",
             base_url, role_update.role_id
         ))
@@ -307,7 +307,7 @@ pub fn update_role(base_url: &str, auth: &str, role_update: RoleUpdate) -> Resul
 
 pub fn delete_role(base_url: &str, auth: &str, role_id: &str) -> Result<(), CliError> {
     Client::new()
-        .delete(&format!("{}/authorization/roles/{}", base_url, role_id))
+        .delete(format!("{}/authorization/roles/{}", base_url, role_id))
         .header("SplinterProtocolVersion", RBAC_PROTOCOL_VERSION)
         .header("Authorization", auth)
         .send()
