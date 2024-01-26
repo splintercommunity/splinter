@@ -640,8 +640,8 @@ impl AdminServiceStore for YamlAdminServiceStore {
             })?
             .proposal_state
             .proposals
-            .iter()
-            .map(|(_, proposal)| proposal.clone())
+            .values()
+            .cloned()
             .collect::<Vec<CircuitProposal>>();
 
         proposals.retain(|proposal| {
@@ -874,8 +874,8 @@ impl AdminServiceStore for YamlAdminServiceStore {
             })?
             .circuit_state
             .circuits
-            .iter()
-            .map(|(_, circuit)| circuit.clone())
+            .values()
+            .cloned()
             .collect();
 
         circuits.retain(|circuit| {
@@ -1016,8 +1016,8 @@ impl AdminServiceStore for YamlAdminServiceStore {
                 })?
                 .circuit_state
                 .nodes
-                .iter()
-                .map(|(_, node)| node.clone())
+                .values()
+                .cloned()
                 .collect::<Vec<_>>()
                 .into_iter(),
         );

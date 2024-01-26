@@ -126,8 +126,7 @@ where
                 }
             }
 
-            let mut nodes_vec: Vec<ProposedNodeModel> =
-                nodes.into_iter().map(|(_, node)| node).collect();
+            let mut nodes_vec: Vec<ProposedNodeModel> = nodes.into_values().collect();
             nodes_vec.sort_by_key(|node| node.position);
 
             let built_proposed_nodes: Vec<ProposedNode> = nodes_vec
@@ -199,10 +198,8 @@ where
                 }
             }
 
-            let mut service_vec: Vec<ProposedServiceModel> = proposed_services
-                .into_iter()
-                .map(|(_, service)| service)
-                .collect();
+            let mut service_vec: Vec<ProposedServiceModel> =
+                proposed_services.into_values().collect();
             service_vec.sort_by_key(|service| service.position);
             let built_proposed_services: Vec<ProposedService> = service_vec
                 .into_iter()

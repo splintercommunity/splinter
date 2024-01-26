@@ -88,8 +88,8 @@ impl PeerMap {
     /// Returns the current list of peer IDs
     pub fn peer_ids(&self) -> Vec<PeerAuthorizationToken> {
         self.peers
-            .iter()
-            .map(|(_, metadata)| metadata.id.clone())
+            .values()
+            .map(|metadata| metadata.id.clone())
             .collect()
     }
 

@@ -86,8 +86,7 @@ where
             }
         }
 
-        let mut service_vec: Vec<ServiceModel> =
-            services.into_iter().map(|(_, service)| service).collect();
+        let mut service_vec: Vec<ServiceModel> = services.into_values().collect();
         service_vec.sort_by_key(|service| service.position);
 
         let ret_services: Vec<Service> = service_vec
