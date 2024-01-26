@@ -375,14 +375,7 @@ impl TwoPhaseEngine {
     }
 
     fn evaluating_proposal(&self, proposal_id: &ProposalId) -> bool {
-        match self.state {
-            State::EvaluatingProposal(ref proposal_status)
-                if proposal_status.proposal_id() == proposal_id =>
-            {
-                true
-            }
-            _ => false,
-        }
+        matches!(self.state, State::EvaluatingProposal(ref proposal_status) if proposal_status.proposal_id() == proposal_id)
     }
 
     fn start_coordination(
