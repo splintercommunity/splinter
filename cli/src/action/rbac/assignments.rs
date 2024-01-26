@@ -186,7 +186,7 @@ impl Action for UpdateAssignmentAction {
         let roles_to_add = arg_matches
             .and_then(|args| args.values_of("add_role"))
             .map(|vals| vals.map(|s| s.to_owned()).collect())
-            .unwrap_or_else(Vec::new);
+            .unwrap_or_default();
 
         let rm_all = arg_matches
             .map(|args| args.is_present("rm_all"))
@@ -198,7 +198,7 @@ impl Action for UpdateAssignmentAction {
                 arg_matches
                     .and_then(|args| args.values_of("rm_role"))
                     .map(|vals| vals.map(|s| s.to_owned()).collect())
-                    .unwrap_or_else(Vec::new),
+                    .unwrap_or_default(),
             )
         };
 

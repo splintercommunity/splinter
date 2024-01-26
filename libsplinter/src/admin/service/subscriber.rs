@@ -71,9 +71,7 @@ impl SubscriberMap {
         listener: Box<dyn AdminServiceEventSubscriber>,
     ) {
         let mut subscribers_by_type = self.subscribers_by_type.borrow_mut();
-        let subscribers = subscribers_by_type
-            .entry(event_type)
-            .or_insert_with(Vec::new);
+        let subscribers = subscribers_by_type.entry(event_type).or_default();
         subscribers.push(listener);
     }
 

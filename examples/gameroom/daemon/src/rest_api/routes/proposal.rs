@@ -172,7 +172,7 @@ fn list_proposals_from_db(
             .into_iter()
             .fold(HashMap::new(), |mut acc, member| {
                 acc.entry(member.circuit_id.to_string())
-                    .or_insert_with(Vec::new)
+                    .or_default()
                     .push(member);
                 acc
             });

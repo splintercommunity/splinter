@@ -181,7 +181,7 @@ impl Action for UpdateRoleAction {
         let permissions_to_add = arg_matches
             .and_then(|args| args.values_of("add_permission"))
             .map(|vals| vals.map(|s| s.to_owned()).collect())
-            .unwrap_or_else(Vec::new);
+            .unwrap_or_default();
 
         let rm_all = arg_matches
             .map(|args| args.is_present("rm_all"))
@@ -193,7 +193,7 @@ impl Action for UpdateRoleAction {
                 arg_matches
                     .and_then(|args| args.values_of("rm_permission"))
                     .map(|vals| vals.map(|s| s.to_owned()).collect())
-                    .unwrap_or_else(Vec::new),
+                    .unwrap_or_default(),
             )
         };
 
