@@ -76,7 +76,7 @@ fn display_splinter_users(
     let users = match (biome_users, biome_oauth_users) {
         (Some(biome_users), Some(biome_oauth_users)) => biome_users
             .into_iter()
-            .chain(biome_oauth_users.into_iter())
+            .chain(biome_oauth_users)
             .collect::<Vec<_>>(),
         (Some(biome_users), None) => biome_users.into_iter().collect::<Vec<_>>(),
         (None, Some(biome_oauth_users)) => biome_oauth_users.into_iter().collect::<Vec<_>>(),

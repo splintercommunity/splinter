@@ -79,9 +79,9 @@ where
                 // Build the `Node`s and return them
                 nodes
                     .into_iter()
-                    .zip(endpoints.into_iter())
-                    .zip(keys.into_iter())
-                    .zip(metadata.into_iter())
+                    .zip(endpoints)
+                    .zip(keys)
+                    .zip(metadata)
                     .map(|(((node, endpoints), keys), metadata)| {
                         let endpoints = endpoints
                             .into_iter()
