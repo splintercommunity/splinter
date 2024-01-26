@@ -59,25 +59,15 @@ impl<'a> KeyStoreUpdateKeysAndPasswordOperation
 
         self.conn
             .transaction::<(), _, _>(|| {
-                if let Err(err) =
-                    delete(keys::table.filter(keys::user_id.eq(user_id))).execute(self.conn)
-                {
-                    return Err(err);
-                }
-                if let Err(err) = insert_into(keys::table)
+                delete(keys::table.filter(keys::user_id.eq(user_id))).execute(self.conn)?;
+                insert_into(keys::table)
                     .values(replacement_keys)
-                    .execute(self.conn)
-                {
-                    return Err(err);
-                }
-                if let Err(err) = diesel::update(
+                    .execute(self.conn)?;
+                diesel::update(
                     user_credentials::table.filter(user_credentials::user_id.eq(&user_id)),
                 )
                 .set(user_credentials::password.eq(replacement_password))
-                .execute(self.conn)
-                {
-                    return Err(err);
-                }
+                .execute(self.conn)?;
 
                 Ok(())
             })
@@ -138,25 +128,15 @@ impl<'a> KeyStoreUpdateKeysAndPasswordOperation
 
         self.conn
             .transaction::<(), _, _>(|| {
-                if let Err(err) =
-                    delete(keys::table.filter(keys::user_id.eq(user_id))).execute(self.conn)
-                {
-                    return Err(err);
-                }
-                if let Err(err) = insert_into(keys::table)
+                delete(keys::table.filter(keys::user_id.eq(user_id))).execute(self.conn)?;
+                insert_into(keys::table)
                     .values(replacement_keys)
-                    .execute(self.conn)
-                {
-                    return Err(err);
-                }
-                if let Err(err) = diesel::update(
+                    .execute(self.conn)?;
+                diesel::update(
                     user_credentials::table.filter(user_credentials::user_id.eq(&user_id)),
                 )
                 .set(user_credentials::password.eq(replacement_password))
-                .execute(self.conn)
-                {
-                    return Err(err);
-                }
+                .execute(self.conn)?;
 
                 Ok(())
             })
