@@ -119,7 +119,7 @@ fn compute_receipt_db_file_name(circuit_id: &str, service_id: &str) -> Result<St
         MessageDigest::sha256(),
         format!("{}::{}", service_id, circuit_id).as_bytes(),
     )
-    .map(|digest| to_hex(&*digest))
+    .map(|digest| to_hex(&digest))
     .map_err(|e| CliError::ActionError(format!("{}", e)))?;
     let db_file = format!("{}-receipts.lmdb", hash);
     Ok(db_file)

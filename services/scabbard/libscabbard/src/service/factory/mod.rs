@@ -276,13 +276,13 @@ impl ScabbardFactoryBuilder {
             ScabbardStorageConfiguration::ConnectionUri {
                 connection_uri: ConnectionUri::Postgres(url),
             } => ScabbardFactoryStorageConfig::Postgres {
-                pool: get_postgres_pool(&*url)?,
+                pool: get_postgres_pool(&url)?,
             },
             #[cfg(feature = "sqlite")]
             ScabbardStorageConfiguration::ConnectionUri {
                 connection_uri: ConnectionUri::Sqlite(conn_str),
             } => ScabbardFactoryStorageConfig::Sqlite {
-                pool: get_sqlite_pool(&*conn_str)?,
+                pool: get_sqlite_pool(&conn_str)?,
             },
             #[cfg(feature = "postgres")]
             ScabbardStorageConfiguration::Postgres { pool } => {

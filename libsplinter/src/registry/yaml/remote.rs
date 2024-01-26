@@ -296,7 +296,7 @@ impl Internal {
 // which allows the local cache to be used across restarts.
 fn compute_cache_filename(url: &str, cache_dir: &str) -> Result<String, RegistryError> {
     let hash = hash(MessageDigest::sha256(), url.as_bytes())
-        .map(|digest| to_hex(&*digest))
+        .map(|digest| to_hex(&digest))
         .map_err(|err| {
             RegistryError::InternalError(InternalError::from_source_with_message(
                 Box::new(err),

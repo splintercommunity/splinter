@@ -188,7 +188,7 @@ impl TransactionalUpgradeStores for PostgresUpgradeStores {
             .get()
             .map_err(|e| InternalError::from_source(Box::new(e)))?;
 
-        conn.transaction::<_, _, _>(|| f(&InTransactionPostgresUpgradeStores(&*conn)))
+        conn.transaction::<_, _, _>(|| f(&InTransactionPostgresUpgradeStores(&conn)))
     }
 
     fn as_upgrade_stores(&self) -> &dyn UpgradeStores {
@@ -317,7 +317,7 @@ impl TransactionalUpgradeStores for SqliteUpgradeStores {
             .get()
             .map_err(|e| InternalError::from_source(Box::new(e)))?;
 
-        conn.transaction::<_, _, _>(|| f(&InTransactionSqliteUpgradeStores(&*conn)))
+        conn.transaction::<_, _, _>(|| f(&InTransactionSqliteUpgradeStores(&conn)))
     }
 
     fn as_upgrade_stores(&self) -> &dyn UpgradeStores {

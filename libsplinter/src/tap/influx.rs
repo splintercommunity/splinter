@@ -121,14 +121,14 @@ impl InfluxRecorder {
                                 counter_entry.value += value;
                                 counter_entry.time = time;
                                 Counter {
-                                    key: &*key,
+                                    key: &key,
                                     value: counter_entry.value,
                                     time: counter_entry.time,
                                 }
                             } else {
                                 let counter = Counter {
                                     time,
-                                    key: &*key,
+                                    key: &key,
                                     value,
                                 };
                                 // Convert the Cow<'_, str> to a Box<str> to only create a pointer
@@ -163,7 +163,7 @@ impl InfluxRecorder {
                                 gauge_entry.time = time;
                                 Gauge {
                                     time: gauge_entry.time,
-                                    key: &*key,
+                                    key: &key,
                                     value: gauge_entry.value,
                                 }
                             } else {
@@ -183,7 +183,7 @@ impl InfluxRecorder {
 
                                 Gauge {
                                     time,
-                                    key: &*key,
+                                    key: &key,
                                     value: gauge_value,
                                 }
                             }

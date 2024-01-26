@@ -80,15 +80,15 @@ impl CommitHashStore for DieselCommitHashStore<diesel::pg::PgConnection> {
     fn get_current_commit_hash(&self) -> Result<Option<String>, CommitHashStoreError> {
         self.pool.execute_read(|conn| {
             CommitHashStoreOperations::new(conn)
-                .get_current_commit_hash(&*self.circuit_id, &*self.service_id)
+                .get_current_commit_hash(&self.circuit_id, &self.service_id)
         })
     }
 
     fn set_current_commit_hash(&self, commit_hash: &str) -> Result<(), CommitHashStoreError> {
         self.pool.execute_write(|conn| {
             CommitHashStoreOperations::new(conn).set_current_commit_hash(
-                &*self.circuit_id,
-                &*self.service_id,
+                &self.circuit_id,
+                &self.service_id,
                 commit_hash,
             )
         })
@@ -100,15 +100,15 @@ impl CommitHashStore for DieselCommitHashStore<diesel::sqlite::SqliteConnection>
     fn get_current_commit_hash(&self) -> Result<Option<String>, CommitHashStoreError> {
         self.pool.execute_read(|conn| {
             CommitHashStoreOperations::new(conn)
-                .get_current_commit_hash(&*self.circuit_id, &*self.service_id)
+                .get_current_commit_hash(&self.circuit_id, &self.service_id)
         })
     }
 
     fn set_current_commit_hash(&self, commit_hash: &str) -> Result<(), CommitHashStoreError> {
         self.pool.execute_write(|conn| {
             CommitHashStoreOperations::new(conn).set_current_commit_hash(
-                &*self.circuit_id,
-                &*self.service_id,
+                &self.circuit_id,
+                &self.service_id,
                 commit_hash,
             )
         })
@@ -143,13 +143,13 @@ impl<'a, C: diesel::Connection> DieselInTransactionCommitHashStore<'a, C> {
 impl<'a> CommitHashStore for DieselInTransactionCommitHashStore<'a, diesel::pg::PgConnection> {
     fn get_current_commit_hash(&self) -> Result<Option<String>, CommitHashStoreError> {
         CommitHashStoreOperations::new(self.conn)
-            .get_current_commit_hash(&*self.circuit_id, &*self.service_id)
+            .get_current_commit_hash(&self.circuit_id, &self.service_id)
     }
 
     fn set_current_commit_hash(&self, commit_hash: &str) -> Result<(), CommitHashStoreError> {
         CommitHashStoreOperations::new(self.conn).set_current_commit_hash(
-            &*self.circuit_id,
-            &*self.service_id,
+            &self.circuit_id,
+            &self.service_id,
             commit_hash,
         )
     }
@@ -161,13 +161,13 @@ impl<'a> CommitHashStore
 {
     fn get_current_commit_hash(&self) -> Result<Option<String>, CommitHashStoreError> {
         CommitHashStoreOperations::new(self.conn)
-            .get_current_commit_hash(&*self.circuit_id, &*self.service_id)
+            .get_current_commit_hash(&self.circuit_id, &self.service_id)
     }
 
     fn set_current_commit_hash(&self, commit_hash: &str) -> Result<(), CommitHashStoreError> {
         CommitHashStoreOperations::new(self.conn).set_current_commit_hash(
-            &*self.circuit_id,
-            &*self.service_id,
+            &self.circuit_id,
+            &self.service_id,
             commit_hash,
         )
     }

@@ -574,7 +574,7 @@ impl Service for AdminService {
                 };
 
                 if let Ok(mut admin_shared) = peer_admin_shared.lock() {
-                    handle_peer_manager_notification(notification, &mut *admin_shared);
+                    handle_peer_manager_notification(notification, &mut admin_shared);
                 } else {
                     error!("the admin shared lock was poisoned");
                     break;
@@ -956,7 +956,7 @@ where
         .write_to_bytes()
         .map_err(|err| Sha256Error(Box::new(err)))?;
     hash(MessageDigest::sha256(), &bytes)
-        .map(|digest| to_hex(&*digest))
+        .map(|digest| to_hex(&digest))
         .map_err(|err| Sha256Error(Box::new(err)))
 }
 

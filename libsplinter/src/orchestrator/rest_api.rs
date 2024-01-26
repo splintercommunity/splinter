@@ -72,7 +72,7 @@ impl RestResourceProvider for ServiceOrchestrator {
                                     .to_string();
 
                                 let service = match lookup_service(
-                                    &*services,
+                                    &services,
                                     &circuit,
                                     &service_id,
                                     &service_type,

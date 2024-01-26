@@ -78,7 +78,7 @@ impl LmdbDatabaseFactory {
         let db = LmdbDatabase::new(
             LmdbContext::new(&db_path, self.indexes.len(), Some(self.db_size))
                 .map_err(|e| InternalError::from_source(Box::new(e)))?,
-            &*self.indexes,
+            &self.indexes,
         )
         .map_err(|e| InternalError::from_source(Box::new(e)))?;
 
@@ -115,7 +115,7 @@ impl LmdbDatabaseFactory {
 
     fn path_from_key(&self, key: &str) -> Result<PathBuf, InternalError> {
         let hash = hash(MessageDigest::sha256(), key.as_bytes())
-            .map(|digest| to_hex(&*digest))
+            .map(|digest| to_hex(&digest))
             .map_err(|e| InternalError::from_source(Box::new(e)))?;
         let db_path = Path::new(&*self.db_dir)
             .to_path_buf()

@@ -201,7 +201,7 @@ impl AdminSubsystemBuilder {
                     .expect("Failed to build connection pool");
 
                 scabbard::migrations::run_sqlite_migrations(
-                    &*pool.get().expect("Failed to get connection for migrations"),
+                    &pool.get().expect("Failed to get connection for migrations"),
                 )
                 .expect("Failed to run migrations");
 
