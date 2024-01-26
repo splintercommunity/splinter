@@ -28,7 +28,7 @@ pub enum ProposalManagerError {
     /// `ProposalManager` does not know about the specified proposal.
     UnknownProposal(ProposalId),
     /// `ProposalManager` failed to send send an update back to consensus.
-    UpdateSendFailed(SendError<ProposalUpdate>),
+    UpdateSendFailed(Box<SendError<ProposalUpdate>>),
 }
 
 impl Error for ProposalManagerError {
@@ -58,7 +58,7 @@ impl std::fmt::Display for ProposalManagerError {
 
 impl From<SendError<ProposalUpdate>> for ProposalManagerError {
     fn from(err: SendError<ProposalUpdate>) -> Self {
-        ProposalManagerError::UpdateSendFailed(err)
+        ProposalManagerError::UpdateSendFailed(Box::new(err))
     }
 }
 
