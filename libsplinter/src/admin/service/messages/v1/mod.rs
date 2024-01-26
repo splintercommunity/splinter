@@ -175,15 +175,10 @@ pub enum AuthorizationType {
     Trust,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub enum PersistenceType {
+    #[default]
     Any,
-}
-
-impl Default for PersistenceType {
-    fn default() -> Self {
-        PersistenceType::Any
-    }
 }
 
 #[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
@@ -191,15 +186,10 @@ pub enum DurabilityType {
     NoDurability,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub enum RouteType {
+    #[default]
     Any,
-}
-
-impl Default for RouteType {
-    fn default() -> Self {
-        RouteType::Any
-    }
 }
 
 #[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]

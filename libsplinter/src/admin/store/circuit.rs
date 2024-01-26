@@ -195,15 +195,10 @@ impl From<&AuthorizationType> for admin::Circuit_AuthorizationType {
 }
 
 /// A circuits message persistence strategy
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub enum PersistenceType {
+    #[default]
     Any,
-}
-
-impl Default for PersistenceType {
-    fn default() -> Self {
-        PersistenceType::Any
-    }
 }
 
 impl From<&messages::PersistenceType> for PersistenceType {
@@ -271,15 +266,10 @@ impl From<&DurabilityType> for admin::Circuit_DurabilityType {
 }
 
 /// How messages are expected to be routed across a circuit
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub enum RouteType {
+    #[default]
     Any,
-}
-
-impl Default for RouteType {
-    fn default() -> Self {
-        RouteType::Any
-    }
 }
 
 impl From<&messages::RouteType> for RouteType {
@@ -312,17 +302,12 @@ impl From<&RouteType> for admin::Circuit_RouteType {
 }
 
 /// Status of the circuit
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub enum CircuitStatus {
+    #[default]
     Active,
     Disbanded,
     Abandoned,
-}
-
-impl Default for CircuitStatus {
-    fn default() -> Self {
-        CircuitStatus::Active
-    }
 }
 
 impl From<&messages::CircuitStatus> for CircuitStatus {
