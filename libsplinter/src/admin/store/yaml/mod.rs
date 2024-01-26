@@ -1228,7 +1228,7 @@ impl TryFrom<YamlService> for Service {
         ServiceBuilder::new()
             .with_service_id(&service.service_id)
             .with_service_type(&service.service_type)
-            .with_node_id(service.allowed_nodes.get(0).ok_or_else(|| {
+            .with_node_id(service.allowed_nodes.first().ok_or_else(|| {
                 InvalidStateError::with_message("Must contain 1 node ID".to_string())
             })?)
             .with_arguments(
@@ -1593,7 +1593,7 @@ impl TryFrom<YamlProposedService> for ProposedService {
         ProposedServiceBuilder::new()
             .with_service_id(&service.service_id)
             .with_service_type(&service.service_type)
-            .with_node_id(service.allowed_nodes.get(0).ok_or_else(|| {
+            .with_node_id(service.allowed_nodes.first().ok_or_else(|| {
                 InvalidStateError::with_message("Must contain 1 node ID".to_string())
             })?)
             .with_arguments(

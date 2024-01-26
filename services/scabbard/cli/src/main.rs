@@ -742,7 +742,7 @@ fn run() -> Result<(), CliError> {
                 let contract_list = ContractList::from_bytes(&contract_bytes)?;
                 let contract = contract_list
                     .contracts()
-                    .get(0)
+                    .first()
                     .ok_or_else(|| CliError::action_error("contract list is empty"))?;
 
                 println!("{} {}", contract.name(), contract.version());

@@ -611,7 +611,7 @@ impl TryFrom<&SplinterService> for CircuitServiceSlice {
             service_type: service.service_type.clone(),
             node_id: service
                 .allowed_nodes
-                .get(0)
+                .first()
                 .ok_or_else(|| {
                     CliError::ActionError(format!(
                         "Service {} is missing node_id",

@@ -786,7 +786,7 @@ impl AdminEventProposedServiceModel {
                     service_type: service.service_type.to_string(),
                     node_id: service
                         .allowed_nodes
-                        .get(0)
+                        .first()
                         .ok_or_else(|| {
                             AdminServiceStoreError::InvalidStateError(
                                 InvalidStateError::with_message(

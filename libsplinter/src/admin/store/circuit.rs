@@ -109,7 +109,7 @@ impl TryFrom<&admin::Circuit> for Circuit {
                 ServiceBuilder::new()
                     .with_service_id(service.get_service_id())
                     .with_service_type(service.get_service_type())
-                    .with_node_id(service.get_allowed_nodes().get(0).ok_or_else(|| {
+                    .with_node_id(service.get_allowed_nodes().first().ok_or_else(|| {
                         InvalidStateError::with_message("No node ID was provided".to_string())
                     })?)
                     .with_arguments(

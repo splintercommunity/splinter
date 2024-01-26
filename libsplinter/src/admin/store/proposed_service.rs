@@ -76,7 +76,7 @@ impl ProposedService {
             service_type: proto.take_service_type(),
             node_id: proto
                 .take_allowed_nodes()
-                .get(0)
+                .first()
                 .ok_or_else(|| {
                     InvalidStateError::with_message(
                         "unable to build, missing field: `node_id`".to_string(),
@@ -218,7 +218,7 @@ impl TryFrom<&messages::SplinterService> for ProposedService {
         ProposedServiceBuilder::new()
             .with_service_id(&splinter_service.service_id)
             .with_service_type(&splinter_service.service_type)
-            .with_node_id(splinter_service.allowed_nodes.get(0).ok_or_else(|| {
+            .with_node_id(splinter_service.allowed_nodes.first().ok_or_else(|| {
                 InvalidStateError::with_message("Must contain 1 node ID".to_string())
             })?)
             .with_arguments(&splinter_service.arguments)

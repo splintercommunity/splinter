@@ -136,7 +136,7 @@ pub async fn login(
     let key = match key_response.status() {
         StatusCode::OK => {
             let data = key_response.json::<Keys>().await?.data;
-            if let Some(key) = data.get(0) {
+            if let Some(key) = data.first() {
                 key.clone()
             } else {
                 error!("User does not have any keys");
