@@ -32,7 +32,7 @@ pub fn build_transport(config: &Config) -> Result<MultiTransport, GetTransportEr
     let mut transports: Vec<SendableTransport> = vec![
         // add tcp transport
         // this will be default for endpoints without a prefix
-        Box::new(TcpTransport::default()),
+        Box::<TcpTransport>::default(),
     ];
 
     // add web socket transport
@@ -57,7 +57,7 @@ pub fn build_transport(config: &Config) -> Result<MultiTransport, GetTransportEr
         )?));
     } else {
         #[cfg(feature = "ws-transport")]
-        transports.push(Box::new(WsTransport::default()));
+        transports.push(Box::<WsTransport>::default());
     }
 
     Ok(MultiTransport::new(transports))
