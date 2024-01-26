@@ -27,7 +27,7 @@ use api::{ClientBiomeUser, ClientOAuthUser};
 pub struct ListSplinterUsersAction;
 
 impl Action for ListSplinterUsersAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         let format = args.value_of("format").unwrap_or("human");

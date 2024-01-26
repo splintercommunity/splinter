@@ -42,7 +42,7 @@ use super::Action;
 pub struct UpgradeAction;
 
 impl Action for UpgradeAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let state_dir = get_state_dir(arg_matches)?;
         let database_uri = get_database_uri(arg_matches)?;
         let store_factory = create_store_factory(database_uri).map_err(|err| {

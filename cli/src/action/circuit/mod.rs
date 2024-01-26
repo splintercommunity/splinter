@@ -50,7 +50,7 @@ use payload::make_signed_payload;
 pub struct CircuitProposeAction;
 
 impl Action for CircuitProposeAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         let mut builder = CreateCircuitMessageBuilder::new();
@@ -662,7 +662,7 @@ struct CircuitVote {
 pub struct CircuitVoteAction;
 
 impl Action for CircuitVoteAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let url = args
             .value_of("url")
@@ -726,7 +726,7 @@ struct CircuitDisband {
 pub struct CircuitDisbandAction;
 
 impl Action for CircuitDisbandAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let url = args
             .value_of("url")
@@ -778,7 +778,7 @@ struct CircuitPurge {
 pub struct CircuitPurgeAction;
 
 impl Action for CircuitPurgeAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let url = args
             .value_of("url")
@@ -839,7 +839,7 @@ struct AbandonedCircuit {
 pub struct CircuitAbandonAction;
 
 impl Action for CircuitAbandonAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let url = args
             .value_of("url")
@@ -900,7 +900,7 @@ struct RemoveProposal {
 pub struct RemoveProposalAction;
 
 impl Action for RemoveProposalAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let url = args
             .value_of("url")
@@ -948,7 +948,7 @@ fn request_proposal_removal(
 pub struct CircuitListAction;
 
 impl Action for CircuitListAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let url = arg_matches
             .and_then(|args| args.value_of("url"))
             .map(ToOwned::to_owned)
@@ -1034,7 +1034,7 @@ fn list_circuits(
 pub struct CircuitShowAction;
 
 impl Action for CircuitShowAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         let url = args
@@ -1129,7 +1129,7 @@ fn show_circuit(
 pub struct CircuitProposalsAction;
 
 impl Action for CircuitProposalsAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let url = arg_matches
             .and_then(|args| args.value_of("url"))
             .map(ToOwned::to_owned)

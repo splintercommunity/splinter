@@ -34,7 +34,7 @@ use super::new_client;
 pub struct ListAssignmentsAction;
 
 impl Action for ListAssignmentsAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let format = arg_matches
             .and_then(|args| args.value_of("format"))
             .unwrap_or("human");
@@ -85,7 +85,7 @@ impl Action for ListAssignmentsAction {
 pub struct CreateAssignmentAction;
 
 impl Action for CreateAssignmentAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let identity = get_identity_arg(&arg_matches)?;
 
         let roles = arg_matches
@@ -123,7 +123,7 @@ impl Action for CreateAssignmentAction {
 pub struct ShowAssignmentAction;
 
 impl Action for ShowAssignmentAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let format = arg_matches
             .and_then(|args| args.value_of("format"))
             .unwrap_or("human");
@@ -174,7 +174,7 @@ impl Action for ShowAssignmentAction {
 pub struct UpdateAssignmentAction;
 
 impl Action for UpdateAssignmentAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let identity = get_identity_arg(&arg_matches)?;
 
         let force = arg_matches
@@ -301,7 +301,7 @@ fn update_assignment(
 pub struct DeleteAssignmentAction;
 
 impl Action for DeleteAssignmentAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let identity = get_identity_arg(&arg_matches)?;
         if !is_dry_run(&arg_matches) {
             new_client(&arg_matches)?.delete_assignment(&identity)
@@ -321,7 +321,7 @@ fn display_human_readable(assignment: &Assignment) {
     }
 }
 
-fn get_identity_arg<'a>(arg_matches: &Option<&ArgMatches<'a>>) -> Result<Identity, CliError> {
+fn get_identity_arg(arg_matches: &Option<&ArgMatches>) -> Result<Identity, CliError> {
     if let Some(key) = arg_matches
         .and_then(|args| args.value_of("id_key"))
         .map(|s| s.to_string())
@@ -341,7 +341,7 @@ fn get_identity_arg<'a>(arg_matches: &Option<&ArgMatches<'a>>) -> Result<Identit
     ))
 }
 
-fn is_dry_run<'a>(arg_matches: &Option<&ArgMatches<'a>>) -> bool {
+fn is_dry_run(arg_matches: &Option<&ArgMatches>) -> bool {
     arg_matches
         .map(|args| args.is_present("dry_run"))
         .unwrap_or(false)

@@ -26,7 +26,7 @@ use super::{
 pub struct StatusAction;
 
 impl Action for StatusAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let status = if new_client(arg_matches)?.is_maintenance_mode_enabled()? {
             "enabled"
         } else {
@@ -40,7 +40,7 @@ impl Action for StatusAction {
 pub struct EnableAction;
 
 impl Action for EnableAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         new_client(arg_matches)?.set_maintenance_mode(true)?;
         println!("Maintenance mode has been enabled");
         Ok(())
@@ -50,7 +50,7 @@ impl Action for EnableAction {
 pub struct DisableAction;
 
 impl Action for DisableAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         new_client(arg_matches)?.set_maintenance_mode(false)?;
         println!("Maintenance mode has been disabled");
         Ok(())

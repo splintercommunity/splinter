@@ -28,7 +28,7 @@ const SPLINTERD_MISSING_HEALTH_STATUS: &str = "The health status endpoint was no
                                                feature.";
 
 impl Action for StatusAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let url = arg_matches
             .and_then(|args| args.value_of("url"))
             .map(ToOwned::to_owned)
