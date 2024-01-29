@@ -13,7 +13,7 @@ jobs:
   unit_test_splinter:
     if: >-
       github.repository_owner == 'Cargill'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -148,7 +148,7 @@ jobs:
     needs: unit_test_splinter
     if: >-
       github.repository_owner == 'Cargill'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
