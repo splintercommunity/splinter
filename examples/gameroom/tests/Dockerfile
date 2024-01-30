@@ -20,6 +20,8 @@ RUN apt-get update \
  tzdata \
  && rm -r /var/lib/apt/lists/*
 
+RUN rustup-init -y --default-toolchain=1.75.0 && rustup update
+
 # Build gameroom cli
 
 WORKDIR /project/gameroom
