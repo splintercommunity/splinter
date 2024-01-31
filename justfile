@@ -59,7 +59,6 @@ ci:
     just ci-lint-dockerfiles
     just ci-lint-openapi
     just ci-shellcheck
-    just ci-test-gameroom
 
 ci-lint-client:
     #!/usr/bin/env sh
@@ -78,10 +77,6 @@ ci-shellcheck:
     docker run --rm koalaman/shellcheck:stable --version
     docker run -t --rm -v $(pwd):/mnt koalaman/shellcheck:stable \
       cli/packaging/ubuntu/completions/splinter
-
-ci-test-gameroom: test-gameroom
-
-ci-test-gameroom-ui: test-gameroom-ui
 
 clean:
     cargo clean
