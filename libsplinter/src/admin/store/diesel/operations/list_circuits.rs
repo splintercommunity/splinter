@@ -207,10 +207,8 @@ where
                 // `service_arguments` to the `ServiceBuilder`.
                 let mut built_services: HashMap<String, Vec<Service>> = HashMap::new();
 
-                let mut service_vec: Vec<((String, String), ServiceModel)> = services
-                    .into_iter()
-                    .map(|((circuit_id, service_id), service)| ((circuit_id, service_id), service))
-                    .collect();
+                let mut service_vec: Vec<((String, String), ServiceModel)> =
+                    services.into_iter().collect();
                 service_vec.sort_by_key(|(_, service)| service.position);
 
                 for ((circuit_id, service_id), service) in service_vec.into_iter() {

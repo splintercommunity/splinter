@@ -153,7 +153,7 @@ impl<'a> TryFrom<&'a SplinterService> for ServiceResponse<'a> {
             service_type: &service.service_type,
             node_id: service
                 .allowed_nodes
-                .get(0)
+                .first()
                 .ok_or("No node id was provided")?
                 .into(),
             arguments: &service.arguments,

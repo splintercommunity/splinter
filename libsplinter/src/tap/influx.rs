@@ -117,18 +117,18 @@ impl InfluxRecorder {
                         time,
                     }) => {
                         let counter = {
-                            if let Some(mut counter_entry) = counters.get_mut(&*key) {
+                            if let Some(counter_entry) = counters.get_mut(&*key) {
                                 counter_entry.value += value;
                                 counter_entry.time = time;
                                 Counter {
-                                    key: &*key,
+                                    key: &key,
                                     value: counter_entry.value,
                                     time: counter_entry.time,
                                 }
                             } else {
                                 let counter = Counter {
                                     time,
-                                    key: &*key,
+                                    key: &key,
                                     value,
                                 };
                                 // Convert the Cow<'_, str> to a Box<str> to only create a pointer
@@ -154,7 +154,7 @@ impl InfluxRecorder {
                         time,
                     }) => {
                         let gauge = {
-                            if let Some(mut gauge_entry) = gauges.get_mut(&*key) {
+                            if let Some(gauge_entry) = gauges.get_mut(&*key) {
                                 match value {
                                     GaugeValue::Absolute(total) => gauge_entry.value = total,
                                     GaugeValue::Increment(amount) => gauge_entry.value += amount,
@@ -163,7 +163,7 @@ impl InfluxRecorder {
                                 gauge_entry.time = time;
                                 Gauge {
                                     time: gauge_entry.time,
-                                    key: &*key,
+                                    key: &key,
                                     value: gauge_entry.value,
                                 }
                             } else {
@@ -183,7 +183,7 @@ impl InfluxRecorder {
 
                                 Gauge {
                                     time,
-                                    key: &*key,
+                                    key: &key,
                                     value: gauge_value,
                                 }
                             }

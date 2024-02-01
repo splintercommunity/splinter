@@ -327,15 +327,10 @@ impl From<&store::AuthorizationType> for AuthorizationType {
     }
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub enum PersistenceType {
+    #[default]
     Any,
-}
-
-impl Default for PersistenceType {
-    fn default() -> Self {
-        PersistenceType::Any
-    }
 }
 
 impl From<&store::PersistenceType> for PersistenceType {
@@ -359,15 +354,10 @@ impl From<&store::DurabilityType> for DurabilityType {
     }
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub enum RouteType {
+    #[default]
     Any,
-}
-
-impl Default for RouteType {
-    fn default() -> Self {
-        RouteType::Any
-    }
 }
 
 impl From<&store::RouteType> for RouteType {
@@ -378,17 +368,12 @@ impl From<&store::RouteType> for RouteType {
     }
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub enum CircuitStatus {
+    #[default]
     Active,
     Disbanded,
     Abandoned,
-}
-
-impl Default for CircuitStatus {
-    fn default() -> Self {
-        CircuitStatus::Active
-    }
 }
 
 impl From<&store::CircuitStatus> for CircuitStatus {

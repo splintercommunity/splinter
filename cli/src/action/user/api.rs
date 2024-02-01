@@ -25,7 +25,7 @@ pub(super) const CLI_SPLINTER_USER_PROTOCOL_VERSION: &str = "1";
 impl SplinterRestClient {
     pub fn list_biome_users(&self) -> Result<Vec<ClientBiomeUser>, CliError> {
         Client::new()
-            .get(&format!("{}/biome/users", self.url))
+            .get(format!("{}/biome/users", self.url))
             .header(
                 "SplinterProtocolVersion",
                 CLI_SPLINTER_USER_PROTOCOL_VERSION,
@@ -66,7 +66,7 @@ impl SplinterRestClient {
     /// Submits a request to list Biome's OAuth users
     pub fn list_oauth_users(&self) -> Result<ClientOAuthUserListResponse, CliError> {
         Client::new()
-            .get(&format!("{}/oauth/users?limit={}", self.url, PAGING_LIMIT))
+            .get(format!("{}/oauth/users?limit={}", self.url, PAGING_LIMIT))
             .header(
                 "SplinterProtocolVersion",
                 CLI_SPLINTER_USER_PROTOCOL_VERSION,

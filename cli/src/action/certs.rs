@@ -58,7 +58,7 @@ const REST_API_CERT: &str = "rest_api.crt";
 const REST_API_KEY: &str = "rest_api.key";
 
 impl Action for CertGenAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         #[cfg(not(feature = "https-certs"))]

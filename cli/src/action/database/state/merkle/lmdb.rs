@@ -76,7 +76,7 @@ impl LazyLmdbMerkleState {
     pub fn delete(self) -> Result<(), InternalError> {
         if self.inner.borrow().is_some() {
             self.factory
-                .get_database_purge_handle(&*self.circuit_id, &*self.service_id)
+                .get_database_purge_handle(&self.circuit_id, &self.service_id)
                 .map_err(|e| InternalError::with_message(format!("{}", e)))?
                 .purge()
                 .map_err(|e| InternalError::with_message(format!("{}", e)))
@@ -93,7 +93,7 @@ impl LazyLmdbMerkleState {
 
         let state_db = self
             .factory
-            .get_database(&*self.circuit_id, &*self.service_id)
+            .get_database(&self.circuit_id, &self.service_id)
             .map_err(|e| transact::error::InternalError::with_message(format!("{}", e)))?;
 
         let state = MerkleState::new(Box::new(state_db.clone()));

@@ -183,21 +183,14 @@ fn query_list_circuits(
 
         let offset_value = offset.unwrap_or(0);
         let total = circuits.len();
-        let limit_value = limit.unwrap_or(total as usize);
+        let limit_value = limit.unwrap_or(total);
 
         let circuits = circuits
             .skip(offset_value)
             .take(limit_value)
             .collect::<Vec<_>>();
 
-        Ok((
-            circuits,
-            link,
-            limit,
-            offset,
-            total as usize,
-            protocol_version,
-        ))
+        Ok((circuits, link, limit, offset, total, protocol_version))
     })
     .then(|res| match res {
         Ok((circuits, link, limit, offset, total_count, protocol_version)) => {

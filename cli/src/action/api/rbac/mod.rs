@@ -136,7 +136,7 @@ where
     T: DeserializeOwned,
 {
     Client::new()
-        .get(&format!("{}{}", base_url, link))
+        .get(format!("{}{}", base_url, link))
         .header("SplinterProtocolVersion", RBAC_PROTOCOL_VERSION)
         .header("Authorization", auth)
         .send()

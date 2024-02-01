@@ -554,7 +554,7 @@ fn add_peer(
         if let Some(mut peer_metadata) = peers.get_by_peer_id(&peer_token_pair).cloned() {
             if peer_metadata.endpoints.len() == 1 && endpoints.len() > 1 {
                 // this should always be true
-                if let Some(endpoint) = peer_metadata.endpoints.get(0) {
+                if let Some(endpoint) = peer_metadata.endpoints.first() {
                     // if peer was added by endpoint, its peer metadata should be updated to
                     // include the full list of endpoints in this request
                     if unreferenced_peers
@@ -647,7 +647,7 @@ fn add_peer(
     info!("Attempting to peer with {}", peer_id);
     let connection_id = format!("{}", Uuid::new_v4());
 
-    let mut active_endpoint = match endpoints.get(0) {
+    let mut active_endpoint = match endpoints.first() {
         Some(endpoint) => endpoint.to_string(),
         None => {
             // remove ref we just added

@@ -34,7 +34,7 @@ use super::new_client;
 pub struct ListRolesAction;
 
 impl Action for ListRolesAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let format = arg_matches
             .and_then(|args| args.value_of("format"))
             .unwrap_or("human");
@@ -72,7 +72,7 @@ impl Action for ListRolesAction {
 pub struct ShowRoleAction;
 
 impl Action for ShowRoleAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let format = arg_matches
             .and_then(|args| args.value_of("format"))
             .unwrap_or("human");
@@ -118,7 +118,7 @@ impl Action for ShowRoleAction {
 pub struct CreateRoleAction;
 
 impl Action for CreateRoleAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let role_id = arg_matches
             .and_then(|args| args.value_of("role_id"))
             .ok_or_else(|| CliError::ActionError("A role must have an ID".into()))?;
@@ -169,7 +169,7 @@ impl Action for CreateRoleAction {
 pub struct UpdateRoleAction;
 
 impl Action for UpdateRoleAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let role_id = arg_matches
             .and_then(|args| args.value_of("role_id"))
             .ok_or_else(|| CliError::ActionError("A role ID must be provided.".into()))?;
@@ -181,7 +181,7 @@ impl Action for UpdateRoleAction {
         let permissions_to_add = arg_matches
             .and_then(|args| args.values_of("add_permission"))
             .map(|vals| vals.map(|s| s.to_owned()).collect())
-            .unwrap_or_else(Vec::new);
+            .unwrap_or_default();
 
         let rm_all = arg_matches
             .map(|args| args.is_present("rm_all"))
@@ -193,7 +193,7 @@ impl Action for UpdateRoleAction {
                 arg_matches
                     .and_then(|args| args.values_of("rm_permission"))
                     .map(|vals| vals.map(|s| s.to_owned()).collect())
-                    .unwrap_or_else(Vec::new),
+                    .unwrap_or_default(),
             )
         };
 
@@ -297,7 +297,7 @@ fn update_role(
 pub struct DeleteRoleAction;
 
 impl Action for DeleteRoleAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let role_id = arg_matches
             .and_then(|args| args.value_of("role_id"))
             .ok_or_else(|| CliError::ActionError("A role ID must be specified".into()))?;
@@ -310,7 +310,7 @@ impl Action for DeleteRoleAction {
     }
 }
 
-fn is_dry_run<'a>(arg_matches: &Option<&ArgMatches<'a>>) -> bool {
+fn is_dry_run(arg_matches: &Option<&ArgMatches>) -> bool {
     arg_matches
         .map(|args| args.is_present("dry_run"))
         .unwrap_or(false)

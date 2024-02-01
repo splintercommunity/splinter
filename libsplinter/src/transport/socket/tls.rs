@@ -58,14 +58,14 @@ impl TlsTransport {
 
         // Build TLS Connector
         let mut connector = SslConnector::builder(SslMethod::tls())?;
-        connector.set_private_key_file(&client_key_path, SslFiletype::PEM)?;
+        connector.set_private_key_file(client_key_path, SslFiletype::PEM)?;
         connector.set_certificate_chain_file(client_cert_path)?;
         connector.check_private_key()?;
 
         // Build TLS Acceptor
         let mut acceptor = SslAcceptor::mozilla_modern(SslMethod::tls())?;
         acceptor.set_private_key_file(server_key_path, SslFiletype::PEM)?;
-        acceptor.set_certificate_chain_file(&server_cert_path)?;
+        acceptor.set_certificate_chain_file(server_cert_path)?;
         acceptor.check_private_key()?;
 
         // if ca_cert is provided set as accept cert, otherwise set verify to none

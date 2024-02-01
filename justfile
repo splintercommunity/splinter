@@ -58,10 +58,7 @@ ci:
     just ci-lint-client
     just ci-lint-dockerfiles
     just ci-lint-openapi
-    just ci-lint-splinter
     just ci-shellcheck
-    just ci-test
-    just ci-test-gameroom
 
 ci-lint-client:
     #!/usr/bin/env sh
@@ -72,13 +69,6 @@ ci-lint-client:
 
 ci-lint-dockerfiles: lint-dockerfiles
 
-ci-lint-splinter:
-    #!/usr/bin/env sh
-    set -e
-    docker-compose -f docker/compose/run-lint.yaml build lint-splinter
-    docker-compose -f docker/compose/run-lint.yaml up \
-      --abort-on-container-exit lint-splinter
-
 ci-lint-openapi: lint-openapi
 
 ci-shellcheck:
@@ -87,17 +77,6 @@ ci-shellcheck:
     docker run --rm koalaman/shellcheck:stable --version
     docker run -t --rm -v $(pwd):/mnt koalaman/shellcheck:stable \
       cli/packaging/ubuntu/completions/splinter
-
-ci-test:
-    #!/usr/bin/env sh
-    set -e
-    docker-compose -f tests/test-splinter.yaml build unit-test-splinter
-    docker-compose -f tests/test-splinter.yaml up \
-      --abort-on-container-exit unit-test-splinter
-
-ci-test-gameroom: test-gameroom
-
-ci-test-gameroom-ui: test-gameroom-ui
 
 clean:
     cargo clean

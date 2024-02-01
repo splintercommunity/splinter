@@ -59,7 +59,7 @@ pub fn setup_xo(
 
     // The node with the first key in the list of scabbard admins is responsible for setting up xo
     let public_key = signer.public_key()?.as_hex();
-    let is_submitter = match scabbard_admin_keys.get(0) {
+    let is_submitter = match scabbard_admin_keys.first() {
         Some(submitting_key) => &public_key == submitting_key,
         None => false,
     };

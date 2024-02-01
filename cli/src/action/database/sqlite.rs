@@ -66,7 +66,7 @@ pub fn sqlite_migrations(connection_string: String) -> Result<(), CliError> {
 
     if connection_string != MEMORY {
         let path = PathBuf::from(&connection_string);
-        let full_path = fs::canonicalize(&path).map_err(|err| {
+        let full_path = fs::canonicalize(path).map_err(|err| {
             CliError::ActionError(format!(
                 "Unable to get absolute path for connection string {}: {}",
                 connection_string, err,

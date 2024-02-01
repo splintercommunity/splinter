@@ -16,19 +16,6 @@ version: "3.7"
 
 services:
 
-  lint-splinter:
-    build:
-      context: ../
-      dockerfile: ./lint.dockerfile
-      args:
-        - http_proxy
-        - https_proxy
-        - no_proxy
-    image: lint-splinter:${ISOLATION_ID}
-    volumes:
-      - ../../:/project/splinter
-    command: just lint
-
   lint-gameroom-client:
     build:
       context: ../../

@@ -134,7 +134,7 @@ impl RegistryReader for UnifiedRegistry {
         // Apply predicate filters
         id_map.retain(|_, node| predicates.iter().all(|predicate| predicate.apply(node)));
 
-        Ok(Box::new(id_map.into_iter().map(|(_, node)| node)))
+        Ok(Box::new(id_map.into_values()))
     }
 
     fn count_nodes(&self, predicates: &[MetadataPredicate]) -> Result<u32, RegistryError> {

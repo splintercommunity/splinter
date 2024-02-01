@@ -53,7 +53,7 @@ pub fn create_sqlite_connection_pool(
     }
     let connection_manager = ConnectionManager::<SqliteConnection>::new(conn_str);
     let mut pool_builder = Pool::builder()
-        .connection_customizer(Box::new(ConnectionCustomizer::default()))
+        .connection_customizer(Box::new(ConnectionCustomizer))
         .error_handler(Box::new(HandlePoolError));
     // A new database is created for each connection to the in-memory SQLite
     // implementation; to ensure that the resulting stores will operate on the same

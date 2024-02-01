@@ -175,7 +175,7 @@ fn query_list_proposals<PS: ProposalStore + 'static>(
             .proposals(filters)
             .map_err(|err| ProposalListError::InternalError(err.to_string()))?;
         let offset_value = offset.unwrap_or(0);
-        let total = proposals.total() as usize;
+        let total = proposals.total();
         let limit_value = limit.unwrap_or(total);
 
         let proposals = proposals

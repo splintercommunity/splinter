@@ -27,7 +27,7 @@ use api::{ClientBiomeUser, ClientOAuthUser};
 pub struct ListSplinterUsersAction;
 
 impl Action for ListSplinterUsersAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         let format = args.value_of("format").unwrap_or("human");
@@ -76,7 +76,7 @@ fn display_splinter_users(
     let users = match (biome_users, biome_oauth_users) {
         (Some(biome_users), Some(biome_oauth_users)) => biome_users
             .into_iter()
-            .chain(biome_oauth_users.into_iter())
+            .chain(biome_oauth_users)
             .collect::<Vec<_>>(),
         (Some(biome_users), None) => biome_users.into_iter().collect::<Vec<_>>(),
         (None, Some(biome_oauth_users)) => biome_oauth_users.into_iter().collect::<Vec<_>>(),

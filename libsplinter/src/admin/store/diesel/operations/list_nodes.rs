@@ -79,8 +79,7 @@ where
             }
         });
 
-        let mut nodes_vec: Vec<CircuitMemberModel> =
-            nodes.into_iter().map(|(_, node)| node).collect();
+        let mut nodes_vec: Vec<CircuitMemberModel> = nodes.into_values().collect();
         nodes_vec.sort_by_key(|node| node.position);
 
         let nodes: Vec<CircuitNode> = nodes_vec

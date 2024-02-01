@@ -45,7 +45,7 @@ impl AdminServiceClient for ReqwestAdminServiceClient {
     /// Submits an admin payload to this client's Splinter node.
     fn submit_admin_payload(&self, payload: Vec<u8>) -> Result<(), InternalError> {
         let request = Client::new()
-            .post(&format!("{}/admin/submit", self.url))
+            .post(format!("{}/admin/submit", self.url))
             .header(header::CONTENT_TYPE, "octet-stream")
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .body(payload)
@@ -140,7 +140,7 @@ impl AdminServiceClient for ReqwestAdminServiceClient {
 
     fn fetch_circuit(&self, circuit_id: &str) -> Result<Option<CircuitSlice>, InternalError> {
         let request = Client::new()
-            .get(&format!("{}/admin/circuits/{}", self.url, circuit_id))
+            .get(format!("{}/admin/circuits/{}", self.url, circuit_id))
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .header("Authorization", &self.auth);
 
@@ -245,7 +245,7 @@ impl AdminServiceClient for ReqwestAdminServiceClient {
 
     fn fetch_proposal(&self, circuit_id: &str) -> Result<Option<ProposalSlice>, InternalError> {
         let request = Client::new()
-            .get(&format!("{}/admin/proposals/{}", self.url, circuit_id))
+            .get(format!("{}/admin/proposals/{}", self.url, circuit_id))
             .header("SplinterProtocolVersion", SPLINTER_PROTOCOL_VERSION)
             .header("Authorization", &self.auth);
 

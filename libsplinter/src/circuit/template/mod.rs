@@ -36,7 +36,7 @@ use rules::Rules;
 
 use yaml_parser::{v1, CircuitTemplate};
 
-pub(self) use crate::admin::messages::{CreateCircuitBuilder, SplinterServiceBuilder};
+use crate::admin::messages::{CreateCircuitBuilder, SplinterServiceBuilder};
 
 /// Default file location for circuit templates
 pub const DEFAULT_TEMPLATE_DIR: &str = "/usr/share/splinter/circuit-templates";

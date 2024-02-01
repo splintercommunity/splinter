@@ -36,7 +36,7 @@ const DEFAULT_OUTPUT_FILE: &str = "./nodes.yaml";
 pub struct RegistryGenerateAction;
 
 impl Action for RegistryGenerateAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         let output_file = args.value_of("file").unwrap_or(DEFAULT_OUTPUT_FILE);
@@ -173,7 +173,7 @@ pub struct RegistryAddAction;
 
 #[cfg(feature = "registry")]
 impl Action for RegistryAddAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
 
         let url = args

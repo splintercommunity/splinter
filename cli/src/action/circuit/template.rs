@@ -22,7 +22,7 @@ use super::Action;
 pub struct ListCircuitTemplates;
 
 impl Action for ListCircuitTemplates {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         // Collect list of template file stems and full paths to the associated file stem
         let templates = CircuitTemplate::list_available_templates()?;
 
@@ -75,7 +75,7 @@ impl Action for ListCircuitTemplates {
 pub struct ShowCircuitTemplate;
 
 impl Action for ShowCircuitTemplate {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let template_name = match args.value_of("name") {
             Some(name) => name,
@@ -93,7 +93,7 @@ impl Action for ShowCircuitTemplate {
 pub struct ListCircuitTemplateArguments;
 
 impl Action for ListCircuitTemplateArguments {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let args = arg_matches.ok_or(CliError::RequiresArgs)?;
         let template_name = match args.value_of("name") {
             Some(name) => name,

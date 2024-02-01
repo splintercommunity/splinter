@@ -88,8 +88,8 @@ impl PeerMap {
     /// Returns the current list of peer IDs
     pub fn peer_ids(&self) -> Vec<PeerAuthorizationToken> {
         self.peers
-            .iter()
-            .map(|(_, metadata)| metadata.id.clone())
+            .values()
+            .map(|metadata| metadata.id.clone())
             .collect()
     }
 
@@ -170,10 +170,7 @@ impl PeerMap {
             for endpoint in peer_metadata.endpoints.iter() {
                 if let Some(mut peer_tokens) = self.endpoints.remove(endpoint) {
                     if peer_tokens.len() > 1 {
-                        peer_tokens = peer_tokens
-                            .into_iter()
-                            .filter(|token| token != peer_id)
-                            .collect();
+                        peer_tokens.retain(|token| token != peer_id);
                         self.endpoints.insert(endpoint.clone(), peer_tokens);
                     }
                 }

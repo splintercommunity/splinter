@@ -103,7 +103,7 @@ impl NetworkSubsystemBuilder {
             .take()
             .unwrap_or(DEFAULT_HEARTBEAT_INTERVAL);
 
-        let transport = MultiTransport::new(vec![Box::new(TcpTransport::default())]);
+        let transport = MultiTransport::new(vec![Box::<TcpTransport>::default()]);
 
         Ok(RunnableNetworkSubsystem {
             node_id,

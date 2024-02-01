@@ -89,8 +89,7 @@ where
                 }
             });
 
-            let mut nodes_vec: Vec<CircuitMemberModel> =
-                nodes.into_iter().map(|(_, node)| node).collect();
+            let mut nodes_vec: Vec<CircuitMemberModel> = nodes.into_values().collect();
             nodes_vec.sort_by_key(|node| node.position);
 
             // Collecting services associated with the `Circuit` using the `list_services` method,

@@ -181,14 +181,14 @@ fn query_list_nodes(
             .map_err(RegistryRestApiError::from)?;
         let offset_value = offset.unwrap_or(0);
         let total = nodes.len();
-        let limit_value = limit.unwrap_or(total as usize);
+        let limit_value = limit.unwrap_or(total);
 
         let nodes = nodes
             .skip(offset_value)
             .take(limit_value)
             .collect::<Vec<_>>();
 
-        Ok((nodes, link, limit, offset, total as usize))
+        Ok((nodes, link, limit, offset, total))
     })
     .then(
         |res: Result<_, BlockingError<RegistryRestApiError>>| match res {

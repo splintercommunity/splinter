@@ -181,7 +181,7 @@ impl fmt::Debug for InternalError {
     }
 }
 
-#[cfg(any(feature = "diesel"))]
+#[cfg(feature = "diesel")]
 impl From<diesel::result::Error> for InternalError {
     fn from(err: diesel::result::Error) -> Self {
         Self::from_source(Box::new(err))

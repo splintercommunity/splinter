@@ -32,7 +32,7 @@ impl SplinterRestClient {
     /// Submits an admin payload to this client's Splinter node.
     pub fn submit_admin_payload(&self, payload: Vec<u8>) -> Result<(), CliError> {
         Client::new()
-            .post(&format!("{}/admin/submit", self.url))
+            .post(format!("{}/admin/submit", self.url))
             .header(header::CONTENT_TYPE, "octet-stream")
             .header("SplinterProtocolVersion", CLI_ADMIN_PROTOCOL_VERSION)
             .header("Authorization", &self.auth)
@@ -114,7 +114,7 @@ impl SplinterRestClient {
 
     pub fn fetch_circuit(&self, circuit_id: &str) -> Result<Option<CircuitSlice>, CliError> {
         Client::new()
-            .get(&format!("{}/admin/circuits/{}", self.url, circuit_id))
+            .get(format!("{}/admin/circuits/{}", self.url, circuit_id))
             .header("SplinterProtocolVersion", CLI_ADMIN_PROTOCOL_VERSION)
             .header("Authorization", &self.auth)
             .send()
@@ -204,7 +204,7 @@ impl SplinterRestClient {
 
     pub fn fetch_proposal(&self, circuit_id: &str) -> Result<Option<ProposalSlice>, CliError> {
         Client::new()
-            .get(&format!("{}/admin/proposals/{}", self.url, circuit_id))
+            .get(format!("{}/admin/proposals/{}", self.url, circuit_id))
             .header("SplinterProtocolVersion", CLI_ADMIN_PROTOCOL_VERSION)
             .header("Authorization", &self.auth)
             .send()

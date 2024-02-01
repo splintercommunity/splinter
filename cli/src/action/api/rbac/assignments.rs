@@ -154,7 +154,7 @@ pub fn create_assignment(
     assignment: Assignment,
 ) -> Result<(), CliError> {
     Client::new()
-        .post(&format!("{}/authorization/assignments", base_url))
+        .post(format!("{}/authorization/assignments", base_url))
         .header("SplinterProtocolVersion", RBAC_PROTOCOL_VERSION)
         .header("Authorization", auth)
         .json(&assignment)
@@ -196,7 +196,7 @@ pub fn get_assignment(
     let (id_value, id_type) = identity.parts();
 
     Client::new()
-        .get(&format!(
+        .get(format!(
             "{}/authorization/assignments/{}/{}",
             base_url, id_type, id_value
         ))
@@ -251,7 +251,7 @@ pub fn update_assignment(
     let (id_value, id_type) = assignment_update.identity.parts();
 
     Client::new()
-        .patch(&format!("{}/authorization/assignments/{}/{}", base_url, id_type, id_value))
+        .patch(format!("{}/authorization/assignments/{}/{}", base_url, id_type, id_value))
         .header("SplinterProtocolVersion", RBAC_PROTOCOL_VERSION)
         .header("Authorization", auth)
         .json(&assignment_update)
@@ -294,7 +294,7 @@ pub fn delete_assignment(base_url: &str, auth: &str, identity: &Identity) -> Res
     let (id_value, id_type) = identity.parts();
 
     Client::new()
-        .delete(&format!(
+        .delete(format!(
             "{}/authorization/assignments/{}/{}",
             base_url, id_type, id_value
         ))

@@ -45,7 +45,7 @@ pub trait StateTreeStore {
 pub struct StateMigrateAction;
 
 impl Action for StateMigrateAction {
-    fn run<'a>(&mut self, arg_matches: Option<&ArgMatches<'a>>) -> Result<(), CliError> {
+    fn run(&mut self, arg_matches: Option<&ArgMatches>) -> Result<(), CliError> {
         let state_dir =
             get_state_dir(arg_matches).map_err(|e| CliError::ActionError(format!("{}", e)))?;
         let lmdb_db_factory = LmdbDatabaseFactory::new_state_db_factory(&state_dir, None);
