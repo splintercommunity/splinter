@@ -377,8 +377,7 @@ fn run() -> Result<(), CliError> {
                         .required(true),
                     Arg::with_name("contract")
                         .help("Name of the contract")
-                        .required(true)
-                        .conflicts_with("delete"),
+                        .required(true),
                     Arg::with_name("read")
                         .help("Set read permission")
                         .short("r")
@@ -991,8 +990,13 @@ fn run() -> Result<(), CliError> {
                 .ok_or_else(|| CliError::MissingArgument("namespace".into()))?;
 
             let payload_builder = if matches.is_present("delete") {
+                let contract = matches
+                    .value_of("contract")
+                    .ok_or_else(|| CliError::MissingArgument("contract".into()))?;
+                
                 DeleteNamespaceRegistryPermissionActionBuilder::new()
                     .with_namespace(namespace.into())
+                    .with_contract_name(contract.into())
                     .into_payload_builder()?
             } else {
                 let contract = matches
