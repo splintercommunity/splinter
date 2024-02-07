@@ -993,7 +993,7 @@ fn run() -> Result<(), CliError> {
                 let contract = matches
                     .value_of("contract")
                     .ok_or_else(|| CliError::MissingArgument("contract".into()))?;
-                
+
                 DeleteNamespaceRegistryPermissionActionBuilder::new()
                     .with_namespace(namespace.into())
                     .with_contract_name(contract.into())
