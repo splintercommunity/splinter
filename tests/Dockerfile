@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM splintercommunity/splinter-dev:v13
+FROM splintercommunity/splinter-dev:v14
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
